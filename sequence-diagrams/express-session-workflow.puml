@@ -1,0 +1,34 @@
+@startuml express-session-flow
+actor client
+participant express
+participant expressSession
+note over expressSession 
+The session datastore could be a database
+or in memory... for now, it is 
+in memory. Restarting the server
+will wipe your session(s).
+end note
+participant inMemory
+participant restricted
+participant getUsers
+participant sqlite3
+client -> client : check for domain cookie
+client -> express : send cookie
+express -> expressSession : search for cookie
+expressSession -> inMemory : retrieve session object (with .user)
+inMemory -> expressSession : return session object (or create new)
+expressSession -> express : add req.session (with .user if it exists)
+express -> restricted : middleware stack (send req, req.session, req.session.user)
+restricted -> restricted : search for req.session.user
+alt not found!
+    restricted -> express : not found, respond with error code
+else found!
+    restricted -> getUsers : found! next()
+    getUsers -> sqlite3 : get response data from database
+    sqlite3 -> getUsers : return data
+    getUsers -> express : return data
+    express -> expressSession : get the session object
+    express -> express : add session object cookie
+    express -> client : respond with cookie
+end
+@enduml

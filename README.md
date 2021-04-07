@@ -17,3 +17,13 @@ Guided project for **Node Auth 1** Module.
 - [ ] type `npm run server` to start the API.
 
 Please follow along as the instructor adds authentication to the API.
+
+
+- ./notes.md
+- ./api/server
+- ./api/auth/auth-router.js
+- ./api/auth/loginCheckMiddleware.js
+- ./sequence-diagrams/*
+- ./api/users/users-router.js
+
+### NOTE: The *.puml files in ./sequence-diagrams can be viewed using the PlantUML extension to VSCode. Just right-click on the document/text area and choose "Preview".

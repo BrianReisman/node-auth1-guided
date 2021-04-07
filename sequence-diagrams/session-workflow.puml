@@ -1,0 +1,21 @@
+@startuml session_workflow
+actor client
+participant server
+participant datastore
+note over datastore 
+The datastore could be a database
+or in memory... for now, it is 
+in memory. Restarting the server
+will wipe your session(s).
+end note
+client -> server : send credentials
+server -> server : verify credentials
+server -> server : create session
+server -> datastore : save session ID
+server -> client : send session ID cookie
+client -> client : store session ID cookie
+client -> server : api request (with cookie)
+server -> datastore : search for session ID
+datastore -> server : return session data 
+server -> client : respond to request
+@enduml
