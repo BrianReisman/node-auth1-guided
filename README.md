@@ -1,4 +1,4 @@
-# Node Auth 1 Guided Project
+# Node Auth 1 Guided Project [Branch 20210406 - https://www.youtube.com/watch?v=ZVoKeE0U8Wc]
 
 Guided project for **Node Auth 1** Module.
 
